@@ -4,6 +4,9 @@ import router from '@/router'
 import VueSocketIO from 'vue-socket.io'
 import SocketIO from 'socket.io-client'
 
+//https://sable-nebulous-gondola.glitch.me/
+
+
 //const url='http://localhost:8081'
 const url = `${window.location.protocol}//${window.location.hostname}:8081`
 //string interpolation `${javascript-code}`
