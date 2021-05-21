@@ -1,17 +1,41 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <nav>
+        <router-link to="/screen1">Screen 1</router-link> |
+        <router-link to="/screen2">Screen 2</router-link> |
+        <router-link to="/screen3">Screen 3</router-link>
+    </nav>
+    <h2>I am {{ socketId }}</h2>
+    <h2>Messages</h2>
+    <div v-for="message, id in messages" :key="id">
+      {{message}}
+    </div>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+  },
+  data () {
+    return {
+        messages: [],
+        socketId: ''
+    }
+  },
+  sockets: {
+    connect() {
+      this.socketId = this.$socket.id
+    },
+    serverMessage(arg) {
+      this.messages.push(arg)
+    },
+    serverMessages(arg) {
+      this.messages=arg
+    }
   }
 }
 </script>
