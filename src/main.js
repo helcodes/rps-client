@@ -8,7 +8,7 @@ import SocketIO from 'socket.io-client'
 
 
 //const url='http://localhost:8081'
-const url = `${window.location.protocol}//${window.location.hostname}:8081`
+let url = `${window.location.protocol}//${window.location.hostname}:8081`
 //string interpolation `${javascript-code}`
 
 if (process.env.VUE_APP_API_URL) {
