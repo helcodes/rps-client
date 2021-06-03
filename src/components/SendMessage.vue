@@ -11,11 +11,16 @@ export default {
     props: ['screen'],
     methods: {
         sendMessage() {
-            this.$socket.emit('message', {
+            //this.$socket.emit('message', {
+                //screen: payload.screen
+            /*this.$store.emit('message', {
+                screen: this.screen
+            })*/
+            this.$socket.dispatch('sendMessage', {
                 screen: this.screen
             })
-        },
+        }
     }
-
 }
 </script>
+

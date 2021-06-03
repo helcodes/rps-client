@@ -15,14 +15,14 @@ export default {
     },
     data () {
         return {
-            message: '----'
+            message: '------'
         }
     },
     methods: {
         sendMessage(arg) {
             this.$socket.emit('message', arg)
-        },
-    }
+        }
+    },
     /*sockets: {
         serverMessage(arg) {
             this.message=arg

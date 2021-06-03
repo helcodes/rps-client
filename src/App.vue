@@ -22,7 +22,7 @@ export default {
   },
   data () {
     return {
-        messages: [],
+        //messages: [],
         socketId: ''
     }
   },
@@ -35,6 +35,11 @@ export default {
     },
     serverMessages(arg) {
       this.messages=arg
+    }
+  },
+  computed: {
+    messages() {
+      return this.$store.state.messages
     }
   }
 }
