@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from '@/router'
 import VueSocketIO from 'vue-socket.io'
 import SocketIO from 'socket.io-client'
+import store from './store'
 
 //https://sable-nebulous-gondola.glitch.me/
 
@@ -16,10 +17,16 @@ if (process.env.VUE_APP_API_URL) {
 }
 
 const io = SocketIO(url, {})
+store.socket=io
+
+if (store.state.user != null) {
+  store.dispatch('login', store.state.user.username)
+}
 
 const vueSocket = new VueSocketIO({
   debug: false,
   connection: io
+  //vuex: {}
 })
 
 Vue.use(vueSocket)//this.$socket is now available in all Vue-objects
