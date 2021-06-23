@@ -25,10 +25,14 @@ const router = new VueRouter({
     routes
 })
 
+/**/if (!store.getters.loggedIn) {console.log("x")}
+
 router.beforeEach((to, from, next) => {
     if (store.getters.loggedIn && to.name == 'login') {
+      console.log("a")
       next('game')
     } else if (! store.getters.loggedIn && to.name != 'login') {
+      console.log("b")
       next('login')
     }
     else {

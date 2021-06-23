@@ -7,6 +7,7 @@
         <button @click="makeTurn('paper')">Paper</button>
         <button @click="makeTurn('scissors')">Scissors</button>
     </div>
+    <gesture v-if="mode == 'gesture'" @gesture="makeTurn"/>
     <div v-if="turn">
       <div>Your choice: {{ turn }}</div>
       <div>Waiting for opponent...</div>
@@ -15,8 +16,10 @@
 </template>
 
 <script>
+import Gesture from './Gesture'
 export default {
   components: {
+    Gesture
   },
   data () {
     return {

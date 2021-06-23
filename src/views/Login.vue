@@ -16,6 +16,15 @@
       <div>
           <button @click="enterGame">Enter game</button>
       </div>
+
+      <h2>Choose interaction mode</h2>
+      <div>
+          <input type="radio" id="buttons" value="buttons" v-model="mode" />
+          <label for="buttons">Buttons</label>
+          <br />
+          <input type="radio" id="gesture" value="gesture" v-model="mode" />
+          <label for="gesture">Gesture</label>
+      </div>
   </div>
 </template>
 
@@ -35,6 +44,12 @@ export default {
   computed: {
     userExists() {
       return this.$store.state.invalidUser
+    },
+    get() {
+        return this.$store.state.mode
+    },
+    set(value) {
+      this.$store.dispatch('setMode', value)
     }
   }
 }

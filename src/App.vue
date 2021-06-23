@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-   
+   <router-view/>
   </div>
 </template>
 
@@ -12,21 +12,10 @@ export default {
   },
   data () {
     return {
-        //messages: [],
-        socketId: ''
     }
-  }/*,
-  sockets: {
-    connect() {
-      this.socketId = this.$socket.id
-    },
-    serverMessage(arg) {
-      this.messages.push(arg)
-    },
-    serverMessages(arg) {
-      this.messages=arg
-    }
-  }*/
+  },
+   computed: {
+  }
 }
 </script>
 
