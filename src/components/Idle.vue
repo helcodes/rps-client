@@ -1,15 +1,33 @@
 <template>
-  <div>
-      <button @click="logout">Logout</button>
-      <h2>Available users</h2>
-      <ul>
-        <li v-for="otherUser, id in users" :key="id" :style="userColor(otherUser)" @click="requestMatch(otherUser)">
-          <span>{{otherUser.username}}</span>
-          <span v-if="otherUser.matchRequest == user.username">{{otherUser.username}} wants to play with you</span>
-          <span v-else>No match request</span>
-        </li>
-      </ul>
-  </div>
+  <v-container>
+      <v-card-title>Choose your opponent!</v-card-title>
+
+      <v-card-text>
+        <v-list v-if="users.length > 0">
+          <v-list-item-group
+          color="primary"
+          >
+            <v-list-item v-for="otherUser, id in users" :key="id" @click="requestMatch(otherUser)">
+              <v-list-item-icon>
+                <v-icon v-if="otherUser.matchRequest == user.username">mdi-flag</v-icon>
+                <v-icon v-else>mdi-account</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title v-if="otherUser.matchRequest == user.username">{{otherUser.username}} wants to play</v-list-item-title>
+                <v-list-item-title v-else>{{otherUser.username}}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+        <v-banner
+          elevation="2"
+          v-if="users.length == 0"
+          icon="mdi-account"
+        >
+          No players available
+        </v-banner>        
+      </v-card-text>
+  </v-container>
 </template>
 
 <script>
@@ -18,20 +36,6 @@ export default {
   methods: {
     requestMatch(user) {
       this.$store.dispatch('requestMatch', user)
-    },
-    userColor(otherUser) {
-      if (otherUser.matchRequest == this.user.username) {
-        return {
-          backgroundColor: 'rgba(200,50,50,0.4)'
-        }
-      } else if (this.$store.state.matchRequest && (this.$store.state.matchRequest.username == otherUser.username)) {
-        return {
-          backgroundColor: 'rgba(50,200,50,0.4)'
-        }
-      }
-    },
-    logout() {
-      this.$store.dispatch('logout')
     }
   },
   computed: {
@@ -48,11 +52,4 @@ export default {
 </script>
 
 <style scoped>
-span {
-  margin: 10px;
-}
-
-li:hover {
-  background-color: rgba(200,50,50,0.8);
-}
 </style>

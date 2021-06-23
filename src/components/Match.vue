@@ -1,25 +1,36 @@
 <template>
-  <div class="about">
-    <h1>Match</h1>
-    <h2 v-if="counter != 0">{{ counter }}</h2>
-    <div v-if="counter == 0 && !turn">
-        <button @click="makeTurn('rock')">Rock</button>
-        <button @click="makeTurn('paper')">Paper</button>
-        <button @click="makeTurn('scissors')">Scissors</button>
-    </div>
-    <gesture v-if="mode == 'gesture'" @gesture="makeTurn"/>
-    <div v-if="turn">
-      <div>Your choice: {{ turn }}</div>
-      <div>Waiting for opponent...</div>
-    </div>
-  </div>
+  <v-container>
+    <v-card-text>
+      <div class="text-h1 text-center"
+        v-if="counter != 0"
+      >
+        {{ counter }}
+      </div>
+      <div v-if="counter == 0 && !turn" class="d-flex pa-2 justify-center">
+          <v-card-actions v-if="mode == 'buttons'">
+            <v-btn @click="makeTurn('rock')">Rock</v-btn>
+            <v-btn @click="makeTurn('paper')">Paper</v-btn>
+            <v-btn @click="makeTurn('scissors')">Scissors</v-btn>
+          </v-card-actions>
+          <gesture v-if="mode == 'gesture'" @gesture="makeTurn"/>
+          <speech v-if="mode == 'speech'" @word="makeTurn"/>
+      </div>
+      <div v-if="turn">
+        <v-card-title>Your choice: {{ turn }}</v-card-title>
+        <v-card-subtitle>Waiting for opponent...</v-card-subtitle>
+      </div>
+    </v-card-text>
+  </v-container>
 </template>
 
 <script>
 import Gesture from './Gesture'
+import Speech from './Speech'
+
 export default {
   components: {
-    Gesture
+    Gesture,
+    Speech
   },
   data () {
     return {
